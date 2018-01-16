@@ -1,0 +1,112 @@
+body{
+	/* border:2px solid black; */
+	padding-top:90px;
+	/* margin-bottom:16px; */
+}
+
+#footer {
+font-size: 1.1em;
+margin-top:20px;
+padding-top:10px;
+border-top:1px solid #273746;
+/* position: absolute; */
+/* bottom: 0;
+width: 100%;
+padding-top:10px;
+padding-bottom:10px; */
+/* background-color: #f5f5f5; */
+}
+
+div.container.footer{
+	border:1px dotted black;
+}
+
+.thumbnail .caption{
+	color: #273746;
+}
+
+#login-background{
+	/* border:2px solid green; */
+	background: url("../img/login.jpg");
+	background-size: cover;
+}
+
+#index-background{
+	/* margin:20px 10px; */
+	background-image: url("http://galaxy-adventure.com/wp-content/uploads/2014/08/bp1.jpg");
+	background-repeat: no-repeat;
+	background-size:cover;
+	/* background-position: center; */
+}
+
+#index-content{
+	text-align: center;
+	padding-top:25%;
+}
+
+.jumbotron {
+	/* background: #AEB6BF; */
+}
+
+.navbar{
+	background: #273746;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+	color:white;
+}
+
+.navbar-inverse .navbar-brand {
+	color:white;
+}
+
+.thumbnail{
+	padding: 0;
+}
+.thumbnail img {
+    height:260px;
+    width:100%;
+}
+
+#info-image{
+	height: 460px;
+}
+
+textarea.input-lg {
+  border:1px solid black;
+  height:90px;
+}
+
+
+.logout_hyperlink{
+	background:none!important;
+     border:none; 
+     padding:0!important;
+
+    /*optional*/
+    font-family:arial,sans-serif; /*input has OS specific font-family*/
+     color:#069;
+     cursor:pointer;
+}
+
+#pseudo-link{
+	text-decoration:none;
+}
+
+
+<!-- for messaging -->
+/* .flash-messages{
+border:1px solid red;
+display: block;
+width: 70%;
+margin: 50px auto;
+text-align: center;
+padding: 5px;
+border-radius: 5px;
+background: gray;
+color:green;
+} */
+
+
+<!-- for error validation -->
+/* .error{color:red;} */
