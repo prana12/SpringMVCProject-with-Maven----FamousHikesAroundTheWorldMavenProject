@@ -1,0 +1,168 @@
+
+//create trails table to store hike trails
+DROP TABLE IF EXISTS `trails`;
+CREATE TABLE `trails` (
+	`id` int(11) NOT NULL AUTO_INCREMENT, 
+  	`name` varchar(60) NOT NULL,
+	`location` varchar(60) NOT NULL,
+  	`distance` int(11) NOT NULL,
+  	`duration` varchar(60) NOT NULL,
+  	`best_time` varchar(60) NOT NULL, 
+  	`image_url` varchar(200) DEFAULT NULL,
+  	`description` longtext NOT NULL,
+  	`create_date` datetime NOT NULL,
+
+  	PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+
+
+//create users table to store user info
+DROP TABLE IF EXISTS `users`;
+CREATE  TABLE `users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(30) NOT NULL ,
+  `password`  VARCHAR(256) NOT NULL ,
+  `first_name` VARCHAR(20),
+  `last_name` VARCHAR(20),
+
+  PRIMARY KEY (user_id),
+  UNIQUE KEY `EMAIL_UNIQUE` (`email`)
+
+  )ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=latin1;
+
+
+
+//create roles to store roles
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE `roles` (
+  `role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role` varchar(20) NOT NULL,
+
+  PRIMARY KEY (role_id),
+  UNIQUE KEY `ROLE_UNIQUE` (`role`)
+
+  )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+
+
+//create user_role join table to match user and role info
+DROP TABLE IF EXISTS `user_role`;
+CREATE TABLE `user_role`(
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,  
+
+  PRIMARY KEY(`user_id`, `role_id`),
+
+  CONSTRAINT `FK_USER` FOREIGN KEY(`user_id`)
+  REFERENCES `users`(`user_id`)
+  ON DELETE NO ACTION ON UPDATE NO ACTION, 
+
+  CONSTRAINT `FK_ROLE` FOREIGN KEY(`role_id`)
+  REFERENCES `roles`(`role_id`)
+  ON DELETE NO ACTION ON UPDATE NO ACTION
+); 
+
+
+
+
+//create reviews table to add review for individual hike trail
+DROP TABLE IF EXISTS `reviews`;
+CREATE TABLE `reviews` (
+  `review_id` int(11) NOT NULL AUTO_INCREMENT,
+  `review` varchar(256) DEFAULT NULL,
+  `trail_id` int(11) DEFAULT NULL,
+  `create_date` datetime,
+  `created_by` int(11) NOT NULL,
+
+  PRIMARY KEY (`review_id`),
+
+  CONSTRAINT `FK_TRAIL` 
+  FOREIGN KEY (`trail_id`) 
+  REFERENCES `trails` (`id`) 
+  ON DELETE NO ACTION ON UPDATE NO ACTION,
+
+  CONSTRAINT `FK_USER`
+  FOREIGN KEY (`created_by`) 
+  REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+
+//Create roles(ADMIN and USER) and create an admin user for CRUD operations on hike trails
+// Users can be created via Registration process from the app
+
+
+//Execute the following insert on trails table for adding starter data
+
+INSERT INTO trails (name, location, distance, duration, best_time, image_url, description, create_date)
+VALUES ('Inca Trail', 'Peru', 26, '4 days', 'May to September', 
+'https://www.intrepidtravel.com/adventures/wp-content/uploads/2016/05/Machu-Picchu-Peru-Intrepid-Travel.jpg',
+'A hike that gets you away from the overcrowded Inca Trail, this trek is often called the Super or Hidden Inca Trail and is more strenuous and less traveled. The extra work is rewarded with amazing views and at the end, you can still take a short bus and train ride to get to Machu Picchu.', now());
+
+INSERT INTO trails (name, location, distance, duration, best_time, image_url, description, create_date)
+VALUES ('Kilimanjaro', 'Tanzania, Africa', 35, '7+ days', 'January, February or September', 
+'https://lh5.googleusercontent.com/--YWLoP8DzYQ/VQkWS7aI6hI/AAAAAAAAIR8/k2W_Dl9B-sg/w728-h486-no/15287168445_673eff9c6c_ox.jpg',
+'Although it is widely popular now, at 19,340 feet, this is Africa’s highest peak and is still on most people’s bucket list. With a wide range of climbing routes, most travel with a guided tour to reach the spectacular view above the clouds.', now());
+
+INSERT INTO trails (name, location, distance, duration, best_time, image_url, description, create_date)
+VALUES ('Everest Base Camp Trek', 'Nepal', 70, '16 days', 'March to May, September to November', 
+'https://www.nationalgeographic.com/content/dam/adventure/photos/000/357/35790.ngsversion.1493937074737.adapt.676.1.jpg',
+'This trek is becoming popular as you get the opportunity to experience the people and culture that makes their home at these elevations. You also get to be face-to-face with the highest point on Earth.', now());
+
+INSERT INTO trails (name, location, distance, duration, best_time, image_url, description, create_date)
+VALUES ('Snownam Trek', 'Bhutan', 200, '25+ days', 'April or October', 
+'https://lh6.googleusercontent.com/-wer3e7egmNo/VQkbYAwvTdI/AAAAAAAAIS8/_3vcgRwUr4M/w728-h546-no/4128305531_9090dbb59a_ox.jpg',
+'Some say that this is the hardest trail on the planet and many are unable to finish because unpredictable weather in the high Himalaya. Traversing 11 passes, most of which are more than 16,000 feet, you can only do this hike with a guided tour and is at the top of most hikers’ bucket lists.', now());
+
+INSERT INTO trails (name, location, distance, duration, best_time, image_url, description, create_date)
+VALUES ('Grand Canyon Rim-to-Rim Hike', 'Arizona, United States', 44, '4-6 days', 'March to May, September to November', 
+'https://lh5.googleusercontent.com/-ydlP6LEU62o/VQkdRJ5aqJI/AAAAAAAAITM/jXO-kQB6k0k/w728-h546-no/5138291768_f284d476d8_ox.jpg',
+'This hike gives you an in-depth look at on of Earth’s greatest features. Not only does it help you appreciate it’s vastness physically, the views and scenery that you get by being up close and personal with it will be more rewarding than any view point you’ll get by a quick stop.', now());
+
+INSERT INTO trails (name, location, distance, duration, best_time, image_url, description, create_date)
+VALUES ('Yosemite Grand Traverse', 'California, United States', 60, '6-7 days', 'Mid-July to Mid-September', 
+'https://lh6.googleusercontent.com/-grabzPQZtjI/VQni9H1gf0I/AAAAAAAAIVU/eeasDNxNhpQ/w728-h1092-no/B1_IMG_7212-copy.jpg',
+'This trek takes you through some of the best of Yosemite National Park (my favorite NP!), part of the John Muir Trail, and the Cathedral Range. You hike through waterfalls, granite basins, sprawling meadows, and you even ascend Half Dome via the Cable Route.', now());
+
+INSERT INTO trails (name, location, distance, duration, best_time, image_url, description, create_date)
+VALUES ('Tour du Mont Blanc', 'France, Italy, Switzerland', 105, 'Around 10 days', 'Anytime from July to mid-September', 
+'https://lh4.googleusercontent.com/-WRbPrQjiJbw/VQnpfn_4IFI/AAAAAAAAIXY/8wJ3k2pQrPk/w728-h482-no/6437617865_ee09ab5633_ox.jpg',
+'TMB not only gives you the chance to hike through 3 countries, but also trek through mountain passes, alpine meadows, and glacial valleys, and the base of the highest mountain in Western Europe.', now());
+
+INSERT INTO trails (name, location, distance, duration, best_time, image_url, description, create_date)
+VALUES ('Laugavegurinn/Fimmvörðuháls Pass', 'Iceland', 50, '4 days', 'June to September', 
+'https://lh4.googleusercontent.com/-Cnqk8bQWsSo/VQnqn9qr19I/AAAAAAAAIXo/V_uDbGfcUUU/w728-h486-no/14050862491_875215273a_ox.jpg',
+'Taking you through volcanic landscapes, lichen-covered rocks, and amazing views of rhyolite peaks, this hike packs in more variety in its 50 miles than most hikes do. You also have the option of a 15-mile add-on to start or end at the 200-foot-high Skogafoss waterfall.', now());
+
+INSERT INTO trails (name, location, distance, duration, best_time, image_url, description, create_date)
+VALUES ('Fitz Roy Trek', 'Patagonia, Argentina', 36, '4-7 days', 'February to March', 
+'https://lh3.googleusercontent.com/-WaV5CA_c8MU/VQngty4C3lI/AAAAAAAAIUw/ubZ50PMOHE8/w728-h1092-no/5455302626_99a4a0b529_ox.jpg',
+'This takes you through Los Glaciares National Park, which by the way is the size of Delaware, and gives you views of beech forests, open plains, glaciers, waterfalls, and the iconic Fitz Roy Massif.', now());
+
+INSERT INTO trails (name, location, distance, duration, best_time, image_url, description, create_date)
+VALUES ('Annapurna Circuit', 'Nepal', 130, '15-20 days', 'October through November and mid-March to mid-April', 
+'https://www.explore-mag.com/media/image/61194_max.jpg',
+'Considered the hiker’s Holy Grail, the 205-km Annapurna Circuit in the Himalayas of Nepal is a smorgasbord of sights, sounds, colours and culture. Starting in the dense, monkey-infested jungle and leading toward mountains like Thorung La, the highest pass at 5,416 metres, and with views of Annapurna III and Gangapurna—striated with ice and mighty in their stature—it won’t take long to see why this trek is so highly regarded. But there’s more to come. Rhododendrons (which bloom in wet spring weather), high-altitude tea houses, friendly locals who will adorn you with a Bindi—travellers tend to come away changed forever. Though still facing challengers, Nepal is open for business following the disastrous earthquake of 2015. They need your tourism dollars now! ', now());
+
+INSERT INTO trails (name, location, distance, duration, best_time, image_url, description, create_date)
+VALUES ('Langtang Trek', 'Langtang Valley, Nepal', 75, '9 days', 'September to December and March to May', 
+'https://adventurejunkies-theadventurejunk.netdna-ssl.com/wp-content/uploads/Langtang-Valley-Trek.jpg',
+'The trek is situated in the Langtang Valley, nearby Kathmandu city. It is the perfect destination for someone who wishes to trek to the Himalayas but is looking for a relatively easy route with shorter walks and lower altitude.
+
+Although it is close to the city, it is hard to tell. The rich ecosystem of the valley is well preserved. The region is a rural landscape comprising of villages, terraced farms and forests encircled with green hills with a backdrop of the white Himalayan ranges.
+
+The route is a scenic one through dense bamboo and rose tree forests that will take you passed waterfalls and snow-capped mountain peaks. The trek is known for having one of the best views of the Annapurna Range.
+
+The bonus that comes along with the wild scenery is the chance to get to know the unique culture of the local people. Because the region is close to the Tibetan border, their culture resembles to theirs’. As you hike through the valley, you will get a chance to learn from their practices and traditions. You will also come across several Buddhist temples and monasteries.', now());
+
+
+INSERT INTO trails (name, location, distance, duration, best_time, image_url, description, create_date)
+VALUES ('West Highland Way', 'United Kingdom', 96, '7-8 days', 'Spring and Autumn', 
+'https://www.explore-mag.com/media/image/61202_max.jpg',
+'There a lot of lovely walks in the British Isles—civilized treks that often include pub nights and stays in hotels or B&Bs. West Highland Way is considered by many to be the best of them all—a 154-km route from Milngavie (near Glasgow) to Fort William, in Scotland. Baggage transfer companies are plentiful, so you can concentrate on the walking—passing lochs, rivers, mountains and moors. You’ll also get a taste of local culture, as you wander through any of the eight en route communities. Pick a route—some choose a simple afternoon walk, some will walk for three or four days, and a few will do the whole thing. Earn that pint!', now());
+
+
