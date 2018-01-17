@@ -36,7 +36,6 @@ public class HikePasswordAndEmailValidator implements Validator {
 		if(user.getPassword()!=null && user.getConfirmPassword()!=null){
 			if (!user.getPassword().equals(user.getConfirmPassword())) {
 				errors.rejectValue("confirmPassword", "different.passwords");
-	
 			}
 		}
 		
