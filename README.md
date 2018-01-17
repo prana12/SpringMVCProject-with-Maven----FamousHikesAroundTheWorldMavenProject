@@ -17,6 +17,6 @@ Guests can check any hike trails page. But only users with membership are able t
 
 On starting, only few recently added hike trails are shown on Homepage. And the trails list will show all the available hike trails from the database. On clicking the thumbnail image from the available choices, anyone can read the trail information. "Add Review" button is displayed for all(but requires membership to complete this). All the reviews(from several users) for the particular trail record are listed according to the date(in descending manner). Users can only delete their reviews in the future as well.
 
-
+A live demo of this app is hosted on Heroku and can be found at https://famous-hikes-around-the-world.herokuapp.com/
 
 
