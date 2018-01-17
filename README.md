@@ -1,4 +1,4 @@
-# SpringMavenMVCProject-- <strong>FamousHikesAroundTheWorldMavenProject</strong>
+# SpringMVCProject with Maven -- <strong>FamousHikesAroundTheWorldMavenProject</strong>
 
 
 A demo Maven Project using the following technologies;
